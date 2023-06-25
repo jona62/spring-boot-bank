@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bank
+    username: postgres
+    password: password
+    name: bank
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+
+logging:
+  level:
+    org.springframework.jdbc: DEBUG

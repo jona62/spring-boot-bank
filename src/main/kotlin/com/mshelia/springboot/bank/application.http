@@ -1,0 +1,28 @@
+### GET request with a header
+GET http://localhost:8080/api/banks
+Accept: application/json
+
+### POST request with header
+POST http://localhost:8080/api/banks
+Content-Type: application/json
+
+{
+  "accountNumber": "121",
+  "trust": -90.0,
+  "transactionFee": 17
+}
+
+### POST request with header
+POST http://localhost:8080/api/banks
+Content-Type: application/json
+
+{
+  "accountNumber": "23452",
+  "trust": 240.0,
+  "transactionFee": 17
+}
+
+
+###
+DELETE http://localhost:8080/api/12452
+Accept: application/json
