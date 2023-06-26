@@ -3,7 +3,7 @@ package com.mshelia.springboot.bank.daoMiddleware
 import com.mshelia.springboot.bank.model.Bank
 import com.mshelia.springboot.bank.operationResult.OperationResult
 
-interface DaoMiddleware {
+interface BankRepository {
     fun retrieveBanks(): Collection<Bank>
 
     fun retrieveBank(accountNumber: String): OperationResult<Bank>

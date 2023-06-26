@@ -1,6 +1,6 @@
 package com.mshelia.springboot.bank.services
 
-import com.mshelia.springboot.bank.daoMiddleware.DaoMiddleware
+import com.mshelia.springboot.bank.daoMiddleware.BankRepository
 import com.mshelia.springboot.bank.exceptions.CreateOperationException
 import com.mshelia.springboot.bank.exceptions.DeleteOperationException
 import com.mshelia.springboot.bank.exceptions.GetOperationException
@@ -10,7 +10,7 @@ import com.mshelia.springboot.bank.operationResult.OperationResult
 import org.springframework.stereotype.Service
 
 @Service
-class BankService(private val dataSource: DaoMiddleware) {
+class BankService(private val dataSource: BankRepository) {
 
     fun getBanks(): Collection<Bank> = dataSource.retrieveBanks()
 

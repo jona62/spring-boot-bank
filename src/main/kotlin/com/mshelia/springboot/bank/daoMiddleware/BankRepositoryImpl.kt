@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository
 import java.sql.ResultSet
 
 @Repository
-class BankRepositoryJdbcTemplate @Autowired constructor(val jdbcTemplate: JdbcTemplate) : DaoMiddleware {
+class BankRepositoryImpl @Autowired constructor(val jdbcTemplate: JdbcTemplate) : BankRepository {
     companion object {
         fun mapRow(resultSet: ResultSet, rowNum: Int): Bank {
             return Bank(

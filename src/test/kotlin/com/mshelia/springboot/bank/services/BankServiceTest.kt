@@ -1,14 +1,12 @@
 package com.mshelia.springboot.bank.services
 
-import com.mshelia.springboot.bank.daoMiddleware.DaoMiddleware
-import io.mockk.every
+import com.mshelia.springboot.bank.daoMiddleware.BankRepository
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class BankServiceTest {
-    private val dataSource: DaoMiddleware = mockk(relaxed = true)
+    private val dataSource: BankRepository = mockk(relaxed = true)
     private val bankService = BankService(dataSource)
 
     @Test
