@@ -6,12 +6,9 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.stereotype.Component
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
 
-@Component
-@ExtendWith(SpringExtension::class)
+@SpringBootTest
 internal class BankRepositoryTest {
 
     @MockkBean(relaxed = true)
@@ -19,7 +16,7 @@ internal class BankRepositoryTest {
 
     @Test
     fun retrieveBanks() {
-        every { dataSource.retrieveBanks() } returns listOf()
+        every { dataSource.retrieveBanks() } returns OperationResult.Success(listOf())
 
         dataSource.retrieveBanks()
 

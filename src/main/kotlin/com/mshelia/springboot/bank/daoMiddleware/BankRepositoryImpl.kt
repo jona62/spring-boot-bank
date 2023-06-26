@@ -22,8 +22,12 @@ class BankRepositoryImpl @Autowired constructor(val jdbcTemplate: JdbcTemplate) 
         }
     }
 
-    override fun retrieveBanks(): Collection<Bank> {
-        return jdbcTemplate.query("SELECT * FROM Bank", Companion::mapRow)
+    override fun retrieveBanks(): OperationResult<Collection<Bank>> {
+        return try {
+            OperationResult.Success(jdbcTemplate.query("SELECT * FROM Bank", Companion::mapRow))
+        } catch (e: DataAccessException) {
+            return OperationResult.Failure("Failed to get banks: ${e.message}")
+        }
     }
 
     override fun retrieveBank(accountNumber: String): OperationResult<Bank> {
@@ -68,7 +72,7 @@ class BankRepositoryImpl @Autowired constructor(val jdbcTemplate: JdbcTemplate) 
             jdbcTemplate.update("DELETE FROM Bank WHERE accountnumber=?", accountNumber)
             OperationResult.Success(bank)
         } catch (e: DataAccessException) {
-            return OperationResult.Failure("Failure During Update")
+            return OperationResult.Failure("Failure During Update: ${e.message}")
         }
     }
 

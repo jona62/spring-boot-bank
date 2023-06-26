@@ -12,7 +12,12 @@ import org.springframework.stereotype.Service
 @Service
 class BankService(private val dataSource: BankRepository) {
 
-    fun getBanks(): Collection<Bank> = dataSource.retrieveBanks()
+    fun getBanks(): Collection<Bank> {
+        return when(val getAllRequestResult = dataSource.retrieveBanks()) {
+            is OperationResult.Success -> getAllRequestResult.result
+            is OperationResult.Failure -> throw GetOperationException(getAllRequestResult.message, getAllRequestResult.status)
+        }
+    }
 
     fun getBank(accountNumber: String): Bank {
         return when (val getRequestResult = dataSource.retrieveBank(accountNumber)) {
