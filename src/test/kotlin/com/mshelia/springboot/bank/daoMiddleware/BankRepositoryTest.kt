@@ -2,26 +2,17 @@ package com.mshelia.springboot.bank.daoMiddleware
 
 import com.mshelia.springboot.bank.model.Bank
 import com.mshelia.springboot.bank.operationResult.OperationResult
-import com.mshelia.springboot.bank.services.BankService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @Component
 @ExtendWith(SpringExtension::class)
 internal class BankRepositoryTest {
-
-    @TestConfiguration
-    class BankRepositoryConfiguration {
-        @Bean
-        fun bankService(dataSource: BankRepository) = BankService(dataSource)
-    }
 
     @MockkBean(relaxed = true)
     private lateinit var dataSource: BankRepository
