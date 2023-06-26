@@ -5,11 +5,9 @@ import com.mshelia.springboot.bank.operationResult.OperationResult
 import com.mshelia.springboot.bank.services.BankService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
@@ -28,14 +26,11 @@ internal class BankRepositoryTest {
     @MockkBean(relaxed = true)
     private lateinit var dataSource: BankRepository
 
-    @Autowired
-    private lateinit var bankService: BankService
-
     @Test
     fun retrieveBanks() {
         every { dataSource.retrieveBanks() } returns listOf()
 
-        bankService.getBanks()
+        dataSource.retrieveBanks()
 
         verify(exactly = 1) { dataSource.retrieveBanks() }
     }
@@ -52,7 +47,7 @@ internal class BankRepositoryTest {
             )
         )
 
-        bankService.getBank(accountId)
+        dataSource.retrieveBank(accountId)
 
         verify(exactly = 1) { dataSource.retrieveBank(accountId) }
     }
@@ -63,7 +58,7 @@ internal class BankRepositoryTest {
 
         every { dataSource.addBank(bank) } returns OperationResult.Success(bank)
 
-        bankService.addBank(bank)
+        dataSource.addBank(bank)
 
         verify(exactly = 1) { dataSource.addBank(any()) }
     }
@@ -74,7 +69,7 @@ internal class BankRepositoryTest {
 
         every { dataSource.updateBank(bank) } returns OperationResult.Success(bank)
 
-        bankService.updateBank(bank)
+        dataSource.updateBank(bank)
 
         verify(exactly = 1) { dataSource.updateBank(any()) }
     }
@@ -91,7 +86,7 @@ internal class BankRepositoryTest {
             )
         )
 
-        bankService.deleteBank(accountId)
+        dataSource.deleteBank(accountId)
 
         verify(exactly = 1) { dataSource.deleteBank(any()) }
     }
